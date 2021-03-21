@@ -1,0 +1,1 @@
+// code when devour button has been clicked

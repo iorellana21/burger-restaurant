@@ -1,21 +1,49 @@
 // call database from mysql-connection
-const database = require('../config/mysql-connection');
+var database = require('../config/mysql-connection');
 
 // create MySQL query methods to be used to retrieve and store data in burgers_db
 // selectAll()
 // insertOne()
 // updateOne()
 
-const orm = {
-    all: function(col1){
-        let query = "SELECT * FROM ??";
+var orm = {
+    all: function(tableInput, cb){
+        let query = "SELECT * FROM ??;";
 
-        database.query(query, [col1], (err, result) => {
-            if(err) console.log(err);
+        database.query(query, [tableInput], (err, result) => {
+            if (err) {
+                throw err;
+            }
 
-            console.log(result);
+            cb(result);
         });
     }
-}
+    // create: function (table, values, cb) {
+    //     let query = "INSERT INTO ?? SET ?";
+
+    //     console.log(query);
+
+    //     database.query(query, [table, values], (err, result) => {
+    //         if (err) {
+    //             throw err;
+    //         }
+
+    //         cb(result);
+    //     });
+    // },
+    // update: function (table, values, condition, cb) {
+    //     let query = "UPDATE ?? SET ? WHERE ?";
+
+    //     console.log(query);
+
+    //     database.query(query, [table, values, condition], (err, result) => {
+    //         if (err) {
+    //             throw err;
+    //         }
+
+    //         cb(result);
+    //     });
+    // }
+};
 
 module.exports = orm;

@@ -1,8 +1,8 @@
-const express = require('express');
+var express = require('express');
 
-const PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 8080;
 
-const app = express();
+var app = express();
 
 app.use(express.static("public"));
 

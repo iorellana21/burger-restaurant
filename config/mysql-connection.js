@@ -1,8 +1,8 @@
 // call MySQL
-const mysql = require('mysql');
+var mysql = require('mysql');
 
 // connect to burgers_db
-const database = mysql.createConnection({
+var database = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",

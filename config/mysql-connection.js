@@ -22,7 +22,7 @@ database.connect((err) => {
         console.error("error connecting: " + err.stack);
         return;
     }
-    console.log("connected!");
+    console.log("connected as id: " + database.threadId);
 });
 
 // export to be used in other files

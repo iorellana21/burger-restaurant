@@ -1,0 +1,26 @@
+{
+  "name": "burger-restaurant",
+  "version": "1.0.0",
+  "description": "user inputs burger they want to eat burger name appears on the left side of page - menu section each burger on menu has 'devour' button  when devour is clicked, burger moves to right side of page",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iorellana21/burger-restaurant.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iorellana21/burger-restaurant/issues"
+  },
+  "homepage": "https://github.com/iorellana21/burger-restaurant#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.1",
+    "mysql": "^2.18.1"
+  }
+}

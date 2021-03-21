@@ -1,14 +1,19 @@
 // call MySQL
 var mysql = require('mysql');
+var database;
 
-// connect to burgers_db
-var database = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "iorellana",
-    database: "burgers_db"
-});
+if(process.env.JAWSDB_URL){
+    database = mysql.createConnection(process.env.JAWSDB_URL);
+}
+else{
+    database = mysql.createConnection({
+        host: "localhost",
+        port: 3306,
+        user: "root",
+        password: "iorellana",
+        database: "burgers_db"
+    });
+}
 
 // just confirming connection
 // can also call other functions after confirming

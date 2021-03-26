@@ -10,7 +10,6 @@ app.use(express.json());
 
 // Set Handlebars.
 var bars = require("express-handlebars");
-
 app.engine("handlebars", bars({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
@@ -18,7 +17,7 @@ app.set("view engine", "handlebars");
 var routes = require("./controllers/burger-controller");
 app.use(routes);
 
-// Start our server so that it can begin listening to client requests.
+// Start server so that it can begin listening to client requests.
 app.listen(PORT, function () {
     // Log (server-side) when our server has started
     console.log("Server listening on: http://localhost:" + PORT);

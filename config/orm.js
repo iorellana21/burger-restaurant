@@ -6,44 +6,81 @@ var database = require('./mysql-connection');
 // insertOne()
 // updateOne()
 
+// ["?", "?", "?"].toString() => "?,?,?";
+function printQuestionMarks(num) {
+    var arr = [];
+    for (var i = 0; i < num; i++) {
+        arr.push("?");
+    }
+    return arr.toString();
+}
+
+// Helper function to convert object key/value pairs to SQL syntax
+function objToSql(ob) {
+    var arr = [];
+    // loop through the keys and push the key/value as a string int arr
+    for (var key in ob) {
+        var value = ob[key];
+        // check to skip hidden properties
+        if (Object.hasOwnProperty.call(ob, key)) {
+            // if string with spaces, add quotations
+            if (typeof value === "string" && value.indexOf(" ") >= 0) {
+                value = "'" + value + "'";
+            }
+            arr.push(key + "=" + value);
+        }
+    }
+    // translate array of strings to a single comma-separated string
+    return arr.toString();
+}
+
+// Object for all our SQL statement functions.
 var orm = {
-    all: function(tableInput, cb){
-        let query = "SELECT * FROM ??;";
-
-        database.query(query, [tableInput], (err, result) => {
+    all: function (tableInput, cb) {
+        var queryString = "SELECT * FROM " + tableInput + ";";
+        database.query(queryString, (err, result) => {
             if (err) {
                 throw err;
             }
-
             cb(result);
         });
     },
-    create: function (table, values, cb) {
-        let query = "INSERT INTO ?? SET ?";
+    create: function (table, cols, vals, cb) {
+        var queryString = "INSERT INTO " + table;
 
-        console.log(query);
+        queryString += " (";
+        queryString += cols.toString();
+        queryString += ") ";
+        queryString += "VALUES (";
+        queryString += printQuestionMarks(vals.length);
+        queryString += ") ";
 
-        database.query(query, [table, values], (err, result) => {
+        console.log(queryString);
+        database.query(queryString, vals, (err, result) => {
             if (err) {
                 throw err;
             }
-
             cb(result);
         });
     },
-    update: function (table, values, condition, cb) {
-        let query = "UPDATE ?? SET ? WHERE ?";
+    // An example of objColVals would be {name: simba, sleepy: true}
+    update: function (table, objColVals, condition, cb) {
+        var queryString = "UPDATE " + table;
 
-        console.log(query);
+        queryString += " SET ";
+        queryString += objToSql(objColVals);
+        queryString += " WHERE ";
+        queryString += condition;
 
-        database.query(query, [table, values, condition], (err, result) => {
+        console.log(queryString);
+        database.query(queryString, (err, result) => {
             if (err) {
                 throw err;
             }
-
             cb(result);
         });
     }
 };
 
+// Export the orm object for the model (cat.js).
 module.exports = orm;

@@ -1,10 +1,65 @@
 {{!-- setup to have the template that handlebars can render onto --}}
 {{!-- create button that will submit user input into database --}}
+<div class="container" style="text-align: center;">
+    <div class="col">
+        {{!-- Burger logo and Title --}}
+        <h1>
+            <img src="/assets/img/burger.jpeg" class="mt-5" style="width: 100px; height: 100px;">
+            <br>
+            Eat-Da-Burger!
+            <br>
+        </h1>
 
-<h1>burger test</h1>
+        {{!-- Burgers entered --}}
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-4 undevouredBurger" style="text-align: center;">
+                <h4>Your Burgers:</h4>
+                <ul id="undevouredBurger">
+                    {{#each burgers}}
+                        {{#unless devoured}}
+                            <li>{{burger_name}}</li>
+                        {{/unless}}
+                    {{/each}}
+                </ul>
+            </div>
 
-<ul>
-    {{#each burgers}}
-        <li>{{burger_name}}</li>
-    {{/each}}
-</ul>
+            {{!-- Devour button --}}
+            <div class="col-2" id="burger-button">
+                <h4>&nbsp;</h4>
+                <ul>
+                    {{#each burgers}}
+                        {{#unless devoured}}
+                            {{!-- <li>{{burger_name}}</li> --}}
+                            <button class="devourBurger" style="color: black;" data-id="{{id}}"
+                                data-newDevoured="{{devour}}">
+                                {{#if devour}}{{else}}Devour!{{/if}}
+                            </button>
+                        {{/unless}}
+                    {{/each}}
+                </ul>
+            </div>
+
+            {{!-- Devoured burgers --}}
+            <div class="col-4">
+                <h4>Burgers You've Eaten:</h4>
+                <ul id="devour-burger">
+                    {{#each burgers}}
+                        {{#if devoured}}
+                            <li id="devour-burger-listItem">{{burger_name}}</li>
+                        {{/if}}
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+
+        {{!-- User input and submit button --}}
+        <form class="submitBurger">
+            <div class="form-group mt-3 mb-1">
+                <input type="text" id="add-burger" name="burger_name">
+            </div>
+            <button type="submit" class="btn btn-primary mt-0 mb-3">SUBMIT</button>
+        </form>
+
+    </div>
+</div>

@@ -24,8 +24,8 @@ Eat-Da-Burger! is an burger restaurant app where users can generate a list of th
 * User can enter a burger they'd like to eat and click Submit
 * User can click on Devour! and burger will move to other side
 ---
-## generatePassword
-![alt text](link to pic "eat-da-burger")
+## Eat-Da-Burger!
+![alt text](https://raw.githubusercontent.com/iorellana21/burger-restaurant/main/public/assets/img/burgerMain.png "eat-da-burger")
 ---
 ## Credits
 * [NPM](https://www.npmjs.com/)
